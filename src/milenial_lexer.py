@@ -1,4 +1,4 @@
-from sly import *
+from sly import Lexer
 
 class BasicLexer(Lexer):
     tokens = { NAME, NUMBER, STRING, IF, PRINT, THEN, ELSE, FOR, FUN, TO, ARROW, EQEQ }
@@ -32,20 +32,17 @@ class BasicLexer(Lexer):
     @_(r'\n+')
     def newline(self,t ):
         self.lineno = t.value.count('\n')
-            def newline(self,t ):
-        self.lineno = t.value.count('\n')
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     lexer = BasicLexer()
     env = {}
     while True:
         try:
-            text = input('ml > ')
+            text = input('>> ')
         except EOFError:
             break
         if text:
             lex = lexer.tokenize(text)
             for token in lex:
                 print(token)
-        
